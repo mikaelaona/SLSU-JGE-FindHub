@@ -1,4 +1,3 @@
-import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from database import db, Item, AdminSetting
@@ -6,11 +5,7 @@ from database import db, Item, AdminSetting
 app = Flask(_name_)
 CORS(app) # Binibigyan ng permiso ang frontend na kumonekta sa backend API
 
-# Kukunin nito ang DATABASE_URL mula sa Render Environment Variables
-db_url = os.getenv('DATABASE_URL', 'sqlite:///app.db')
-if db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
-
+# SQLite Database File Location
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
